@@ -1,10 +1,17 @@
+/**
+ * @description index page
+ */
+
 import React from 'react';
+import { Link, history } from 'umi';
 import styles from './index.less';
+
+history.push('/Prologue');
 
 export default () => {
   return (
     <div>
-      <h1 className={styles.title}>Page index</h1>
+      <Link to="/Prologue">Start</Link>
     </div>
   );
 };

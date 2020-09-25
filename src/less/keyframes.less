@@ -1,0 +1,121 @@
+/*#region package prefix adaption*/
+.keyframes (@prefix, @name, @content) when (@prefix=def) {
+  @keyframes @name {
+    @content();
+  }
+}
+
+.keyframes (@prefix, @name, @content) when (@prefix=moz) {
+  @-moz-keyframes @name {
+    @content();
+  }
+}
+
+.keyframes (@prefix, @name, @content) when (@prefix=o) {
+  @-o-keyframes @name {
+    @content();
+  }
+}
+
+.keyframes (@prefix, @name, @content) when (@prefix=webkit) {
+  @-webkit-keyframes @name {
+    @content();
+  }
+}
+
+.keyframes (@prefix, @name, @content) when (@prefix=all) {
+  .keyframes(moz, @name, @content);
+  .keyframes(o, @name, @content);
+  .keyframes(webkit, @name, @content);
+  .keyframes(def, @name, @content);
+}
+
+.makeframes(@name, @content) {
+  .keyframes(all, @name, @content);
+}
+
+/*#endregion*/
+
+/*#region simple transformations*/
+
+.makeframes(fadein, {from {opacity: 0;} to {opacity: 1;}});
+
+.makeframes(fadeout, {from {opacity: 1;} to {opacity: 0;}});
+
+.makeframes(
+  rotate,
+  {from {transform: rotate(0turn) ;} to {transform: rotate(1turn) ;}}
+);
+
+.makeframes(
+  rotate_half,
+  {from {transform: rotate(0turn) ;} to {transform: rotate(0.5turn) ;}}
+);
+
+.makeframes(widthIn, {from {width: 0%;} to {width: 100%;}});
+
+.makeframes(
+  rotateY,
+  {from {transform: rotateY(0) ;} to {transform: rotateY(-360deg) ;}}
+);
+
+.makeframes(
+  rotateY_half,
+  {from {transform: rotateY(0) ;} to {transform: rotateY(-180deg) ;}}
+);
+
+.makeframes(
+  slidein_top,
+  {from {transform: translateY(-100%) ;} to {transform: translateY(0) ;}}
+);
+
+.makeframes(
+  slidein_left,
+  {from {transform: translateX(-100%) ;} to {transform: translateX(0) ;}}
+);
+
+.makeframes(
+  slidein_bottom,
+  {from {transform: translateY(100%) ;} to {transform: translateY(0) ;}}
+);
+
+.makeframes(
+  slidein_right,
+  {from {transform: translateX(100%) ;} to {transform: translateX(0) ;}}
+);
+
+.makeframes(
+  slideout_left,
+  {from {transform: translateX(0) ;} to {transform: translateX(-100%) ;}}
+);
+
+.makeframes(
+  fadeout_left,
+  {from {transform: translateX(0) ; opacity: 1;} to {transform:
+    translateX(-100%) ; opacity: 0;}}
+);
+
+.makeframes(
+  fadeout_bottom,
+  {from {transform: translateY(0) ; opacity: 1;} to {transform: translateY(100%)
+    ; opacity: 0;}}
+);
+
+.makeframes(
+  fadein_top,
+  {from {transform: translateY(-100%) ; opacity: 0;} to {transform:
+    translateY(0) ; opacity: 1;}}
+);
+
+.makeframes(
+  fadein_left,
+  {from {transform: translateX(-100%) ; opacity: 0;} to {transform:
+    translateX(0) ; opacity: 1;}}
+);
+
+.makeframes(
+  jumpin_top,
+  {0% {transform: translateY(-100%) ;} 50% {transform: translateY(10%) ;} 100% {transform:
+    translateY(0) ;}}
+);
+/*#endregion*/
