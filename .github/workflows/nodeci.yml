@@ -20,6 +20,8 @@ jobs:
       #npm install and build
       - run: npm install
       - run: npm run build
+      #clean
+      - run: rm -rf /var/www/html/*
       - name: deploy
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
@@ -29,16 +31,3 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: "/var/www/html/"
-  #deploy production
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   steps:
-  #       - name: deploy
-  #         uses: easingthemes/ssh-deploy@v2.1.5
-  #         env:
-  #           SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_SSH_KEY }}
-  #           ARGS: "-rltgoDzvO"
-  #           SOURCE: "dist/"
-  #           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-  #           REMOTE_USER: ${{ secrets.REMOTE_USER }}
