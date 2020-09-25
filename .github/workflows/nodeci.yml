@@ -14,10 +14,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: use nodejs 12
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v1
         with:
               node-version: '12'
-              check-latest: true
       #npm install and build
       - run: npm install
       - run: npm run build
