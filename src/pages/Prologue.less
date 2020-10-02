@@ -223,11 +223,13 @@
   top: 0;
   width: 100%;
   height: 100%;
+
   .pc(
     {div {position: absolute; width: 40%; height: 5rem; background-color:
       #1a7690; opacity: 0;} .border_left {top: -4rem; left: -8rem;} .border_righer
       {bottom: -4rem; right: -8rem;}}
   );
+
   .mb(
     {div {position: absolute; width: 80%; height: 2.5rem; background-color:
       #1a7690; opacity: 0;} .border_left {top: 0; left: -4rem;} .border_righer {bottom:
@@ -250,11 +252,10 @@
     .pc({right: 1rem; bottom: 2rem;});
 
     .mb(
-        {--width: 9rem; width: var(--width) ; height: calc(
-            var(--width) * 85 / 280
-          ) ; right: calc(50% - var(--width) / 2) ; bottom: 1rem;}
-      )
-      !important !important;
+      {--width: 9rem; width: var(--width) ; height: calc(
+          var(--width) * 85 / 280
+        ) ; right: calc(50% - var(--width) / 2) ; bottom: 1rem;}
+    );
   }
 }
 
