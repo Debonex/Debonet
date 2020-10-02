@@ -9,3 +9,10 @@
     @content();
   }
 }
+
+.makevar(@key, @value) {
+  @akey: @key;
+  .var-@{akey}-@{value} {
+    --var: true;
+  }
+}

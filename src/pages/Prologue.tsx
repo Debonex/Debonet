@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { createElement } from 'react';
 import styles from './Prologue.less';
 import ButtonSkip from '@/components/ButtonSkip';
+import Switchers from '@/components/SceneSwitchers';
 
 const bars_count = 13;
 const bars_list = new Array(bars_count).fill(0);
@@ -11,8 +12,13 @@ const switcher_list = new Array(switcher_count).fill(0);
 const title_count = 7;
 const title_list = new Array(title_count).fill(0);
 
-let item: Element = document.getElementById(styles.vars) || new Element();
-let vars: CSSStyleDeclaration = getComputedStyle(item);
+let vars = new Map();
+for (let style in styles) {
+  if (style.startsWith('var-')) {
+    let splitIdx: number = style.lastIndexOf('-');
+    vars.set(style.substr(4, splitIdx - 4), style.substr(splitIdx + 1));
+  }
+}
 
 export default () => {
   return (
@@ -50,20 +56,20 @@ export default () => {
         <div className={styles.container_welcome}>
           <div className={styles.welcome}></div>
         </div>
-        <div className={styles.container_switchers}>
-          {switcher_list.map((item, idx) => (
-            <div
-              className={
-                styles.switcher + ' ' + styles['switcher_' + (idx + 1)]
-              }
-              key={idx}
-            />
-          ))}
-        </div>
+        <Switchers
+          count={4}
+          dur={vars.get('dur-switcher')}
+          delay={vars.get('delay-switcher')}
+          gap={vars.get('dur-gap-switcher')}
+          colors={[]}
+          shape={'square'}
+          type={'normal'}
+          onAnimationEnd={() => {}}
+        />
         <div className={styles.container_title}>
           <div className={styles.title_bg}>
             {title_list.map((item, idx) => (
-              <div className={styles['title_' + (idx + 1)]} />
+              <div className={styles['title_' + (idx + 1)]} key={idx} />
             ))}
           </div>
         </div>

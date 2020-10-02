@@ -1,0 +1,25 @@
+@import '../keyframes.less';
+
+.container_switchers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  .switcher {
+    position: absolute;
+    top: calc(50% - 50vmax);
+    width: 100vmax;
+    height: 100vmax;
+    transform: scale(0);
+
+    .setframes(
+      animation_switcher,
+      {from {transform: scale(0) rotate(0deg) ;} to {transform: scale(1)
+        rotate(-90deg) ;}}
+    );
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+  }
+}

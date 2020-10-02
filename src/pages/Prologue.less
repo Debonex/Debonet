@@ -1,6 +1,6 @@
-@import '../less/colorStyle';
+@import '../less/colorStyle.less';
 @import '../less/keyframes.less';
-@import '../less/adaption';
+@import '../less/utils.less';
 
 @bars-count: 13;
 @bars-count-centery: ceil(@bars-count / 2);
@@ -120,31 +120,31 @@
 }
 
 // normal styles for switchers
-.generate_switcher(@i) when (@i<=@switcher-count) {
-  .switcher_@{i} {
-    background-color: extract(@switcher-color-list, @i);
-  }
+// .generate_switcher(@i) when (@i<=@switcher-count) {
+//   .switcher_@{i} {
+//     background-color: extract(@switcher-color-list, @i);
+//   }
 
-  .generate_switcher(@i+1);
-}
+//   .generate_switcher(@i+1);
+// }
 
-.container_switchers {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+// .container_switchers {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
 
-  .switcher {
-    position: absolute;
-    top: calc(50% - 50vmax);
-    width: 100vmax;
-    height: 100vmax;
-    transform: scale(0);
-  }
+//   .switcher {
+//     position: absolute;
+//     top: calc(50% - 50vmax);
+//     width: 100vmax;
+//     height: 100vmax;
+//     transform: scale(0);
+//   }
 
-  .generate_switcher(1);
-}
+//   .generate_switcher(1);
+// }
 
 // normal styles for title
 @height-title-bg: 5rem;
@@ -269,11 +269,18 @@
     3;}}
 );
 
-.makeframes(
-  animation_switcher,
-  {from {transform: scale(0) rotate(0deg) ;} to {transform: scale(1)
-    rotate(-90deg) ;}}
-);
+// .makeframes(animation_switcher,
+//     {
+//     from {
+//       transform: scale(0) rotate(0deg);
+//     }
+
+//     to {
+//       transform: scale(1) rotate(-90deg);
+//     }
+//   }
+
+// );
 
 .makeframes(
   animation_border,
@@ -366,21 +373,21 @@
 @delay-switcher: @delay-welcome-over;
 @delay-switchers-over: @delay-switcher + @switcher-count* @dur-gap-switcher;
 
-.generate_animation_switcher(@i) when (@i<=@switcher-count) {
-  .switcher_@{i} {
-    animation-name: animation_switcher;
-    animation-duration: @dur-switcher + (@i * @dur-gap-switcher);
-    animation-timing-function: ease;
-    animation-delay: @delay-switcher;
-    animation-fill-mode: forwards;
-  }
+// .generate_animation_switcher(@i) when (@i<=@switcher-count) {
+//   .switcher_@{i} {
+//     animation-name: animation_switcher;
+//     animation-duration: @dur-switcher + (@i * @dur-gap-switcher);
+//     animation-timing-function: ease;
+//     animation-delay: @delay-switcher;
+//     animation-fill-mode: forwards;
+//   }
 
-  .generate_animation_switcher(@i+1);
-}
+//   .generate_animation_switcher(@i+1);
+// }
 
-.container_switchers {
-  .generate_animation_switcher(1);
-}
+// .container_switchers {
+//   .generate_animation_switcher(1);
+// }
 
 //animation for title
 @delay-title-bg: @delay-switchers-over;
@@ -428,3 +435,8 @@
 }
 
 /*#endregion*/
+
+// variables
+.makevar(dur-switcher, @dur-switcher);
+.makevar(dur-gap-switcher, @dur-gap-switcher);
+.makevar(delay-switcher, @delay-switcher);
