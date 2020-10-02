@@ -250,10 +250,11 @@
     .pc({right: 1rem; bottom: 2rem;});
 
     .mb(
-      {--width: 9rem; width: var(--width) ; height: calc(
-          var(--width) * 85 / 280
-        ) !important; right: calc(50% - var(--width) / 2) ; bottom: 1rem;}
-    ) !important;
+        {--width: 9rem; width: var(--width) ; height: calc(
+            var(--width) * 85 / 280
+          ) ; right: calc(50% - var(--width) / 2) ; bottom: 1rem;}
+      )
+      !important !important;
   }
 }
 
@@ -384,7 +385,7 @@
 @delay-title-bg: @delay-switchers-over;
 @dur-title-bg: 500ms;
 @delay-title-bg-line: @delay-title-bg+ @dur-title-bg;
-@dur-title-bg-line: 1200ms;
+@dur-title-bg-line: 400ms;
 @delay-title: @delay-title-bg-line + @dur-title-bg-line - 500ms;
 @dur-title: 500ms;
 @dur-gap-title: 150ms;
