@@ -11,6 +11,9 @@ const switcher_list = new Array(switcher_count).fill(0);
 const title_count = 7;
 const title_list = new Array(title_count).fill(0);
 
+let item: Element = document.getElementById(styles.vars) || new Element();
+let vars: CSSStyleDeclaration = getComputedStyle(item);
+
 export default () => {
   return (
     <div className={styles.container_prologue}>
@@ -71,6 +74,7 @@ export default () => {
         <div className={styles.container_skip}>
           <ButtonSkip skipTo="Home" size={0.75} />
         </div>
+        <div id={styles.vars}></div>
       </div>
     </div>
   );
