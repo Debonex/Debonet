@@ -42,6 +42,8 @@ const SceneSwitchers: FC<SceneSwitchersProps> = ({
             animationDuration: 'calc(' + dur + ' + ' + gap + ' * ' + idx + ')',
             animationDelay: delay,
           }}
+          onAnimationEnd={idx == list.length - 1 ? onAnimationEnd : () => {}}
+          key={idx}
         />
       ))}
     </div>

@@ -119,33 +119,6 @@
   }
 }
 
-// normal styles for switchers
-// .generate_switcher(@i) when (@i<=@switcher-count) {
-//   .switcher_@{i} {
-//     background-color: extract(@switcher-color-list, @i);
-//   }
-
-//   .generate_switcher(@i+1);
-// }
-
-// .container_switchers {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-
-//   .switcher {
-//     position: absolute;
-//     top: calc(50% - 50vmax);
-//     width: 100vmax;
-//     height: 100vmax;
-//     transform: scale(0);
-//   }
-
-//   .generate_switcher(1);
-// }
-
 // normal styles for title
 @height-title-bg: 5rem;
 @width-title-bg: 30rem;
@@ -237,6 +210,26 @@
   );
 }
 
+//normal styles for bg
+.container_bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  .bg_circle {
+    position: absolute;
+    left: calc(50vw - 20vmax);
+    top: calc(50vh - 20vmax);
+    width: 40vmax;
+    height: 40vmax;
+    border-radius: 50%;
+    background-color: rgba(128, 128, 128, 0.15);
+    transform: scale(0);
+  }
+}
+
 // skip
 .container_skip {
   position: absolute;
@@ -251,11 +244,7 @@
 
     .pc({right: 1rem; bottom: 2rem;});
 
-    .mb(
-      {--width: 9rem; width: var(--width) ; height: calc(
-          var(--width) * 85 / 280
-        ) ; right: calc(50% - var(--width) / 2) ; bottom: 1rem;}
-    );
+    .mb({right: calc(50% - 105px) ; bottom: 1rem;});
   }
 }
 
@@ -268,19 +257,6 @@
   {from {opacity: 0; height: 0;} to {opacity: 1; height: (100% / @bars-count) *
     3;}}
 );
-
-// .makeframes(animation_switcher,
-//     {
-//     from {
-//       transform: scale(0) rotate(0deg);
-//     }
-
-//     to {
-//       transform: scale(1) rotate(-90deg);
-//     }
-//   }
-
-// );
 
 .makeframes(
   animation_border,
@@ -373,27 +349,21 @@
 @delay-switcher: @delay-welcome-over;
 @delay-switchers-over: @delay-switcher + @switcher-count* @dur-gap-switcher;
 
-// .generate_animation_switcher(@i) when (@i<=@switcher-count) {
-//   .switcher_@{i} {
-//     animation-name: animation_switcher;
-//     animation-duration: @dur-switcher + (@i * @dur-gap-switcher);
-//     animation-timing-function: ease;
-//     animation-delay: @delay-switcher;
-//     animation-fill-mode: forwards;
-//   }
+// animation for bg
+@dur-bg-circle: 800ms;
+@delay-bg-circle: @delay-switchers-over;
 
-//   .generate_animation_switcher(@i+1);
-// }
-
-// .container_switchers {
-//   .generate_animation_switcher(1);
-// }
+.container_bg {
+  .bg_circle {
+    animation: scalein_jump @dur-bg-circle ease @delay-bg-circle forwards;
+  }
+}
 
 //animation for title
-@delay-title-bg: @delay-switchers-over;
-@dur-title-bg: 500ms;
+@delay-title-bg: @delay-switchers-over + @dur-bg-circle;
+@dur-title-bg: 800ms;
 @delay-title-bg-line: @delay-title-bg+ @dur-title-bg;
-@dur-title-bg-line: 400ms;
+@dur-title-bg-line: 800ms;
 @delay-title: @delay-title-bg-line + @dur-title-bg-line - 500ms;
 @dur-title: 500ms;
 @dur-gap-title: 150ms;
@@ -434,9 +404,11 @@
   }
 }
 
+@delay-end: @delay-title + @dur-gap-title * @title-count + 800ms;
 /*#endregion*/
 
 // variables
 .makevar(dur-switcher, @dur-switcher);
 .makevar(dur-gap-switcher, @dur-gap-switcher);
 .makevar(delay-switcher, @delay-switcher);
+.makevar(delay-end, @delay-end);

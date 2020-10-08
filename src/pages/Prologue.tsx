@@ -1,13 +1,12 @@
 import React, { createElement } from 'react';
+import { history } from 'umi';
 import styles from './Prologue.less';
 import ButtonSkip from '@/components/ButtonSkip';
 import Switchers from '@/components/SceneSwitchers';
+import colorbrewer from '@/libs/colorbrewer';
 
 const bars_count = 13;
 const bars_list = new Array(bars_count).fill(0);
-
-const switcher_count = 5;
-const switcher_list = new Array(switcher_count).fill(0);
 
 const title_count = 7;
 const title_list = new Array(title_count).fill(0);
@@ -61,11 +60,20 @@ export default () => {
           dur={vars.get('dur-switcher')}
           delay={vars.get('delay-switcher')}
           gap={vars.get('dur-gap-switcher')}
-          colors={[]}
+          colors={[...colorbrewer.Blues['4']].reverse()}
           shape={'square'}
           type={'normal'}
-          onAnimationEnd={() => {}}
+          onAnimationEnd={() => {
+            console.log('end');
+          }}
         />
+        <div className={styles.container_borders}>
+          <div className={styles.border_left}></div>
+          <div className={styles.border_righer}></div>
+        </div>
+        <div className={styles.container_bg}>
+          <div className={styles.bg_circle}></div>
+        </div>
         <div className={styles.container_title}>
           <div className={styles.title_bg}>
             {title_list.map((item, idx) => (
@@ -73,13 +81,21 @@ export default () => {
             ))}
           </div>
         </div>
-        <div className={styles.container_borders}>
-          <div className={styles.border_left}></div>
-          <div className={styles.border_righer}></div>
-        </div>
         <div className={styles.container_skip}>
           <ButtonSkip skipTo="Home" size={0.75} />
         </div>
+        <Switchers
+          count={4}
+          dur={'800ms'}
+          delay={vars.get('delay-end')}
+          gap={'120ms'}
+          colors={[...colorbrewer.Blues['4']].reverse()}
+          shape={'square'}
+          type={'normal'}
+          onAnimationEnd={() => {
+            history.push('/Home');
+          }}
+        />
         <div id={styles.vars}></div>
       </div>
     </div>
